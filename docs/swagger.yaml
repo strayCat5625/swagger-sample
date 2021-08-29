@@ -1,24 +1,137 @@
 swagger: '2.0'
 info:
   version: 1.0.0
-  title: タイトル
+  title: 映画
 paths:
-  '/user/{id}':
+  '/movies/{id}':
     get:
-      description: ユーザー情報取得
+      description: 指定した映画情報を取得する
       parameters:
-      - name: id
-        in: path
-        description: user id
-        required: true
-        type: number
+        - name: id
+          in: path
+          description: user id
+          required: true
+          type: number
       responses:
         '200':
-          description: 成功
+          $ref: '#/responses/movie'
+        '404':
+          description: Not Found
           schema:
             type: object
             properties:
-              id:
-                type: integer
-              username:
-                type: string
+              result:
+                $ref: ''
+      operationId: reference
+    parameters:
+      - $ref: '#/parameters/id'
+    put:
+      summary: ''
+      operationId: update
+      responses:
+        '200':
+          $ref: '#/responses/参照映画情報'
+      description: 指定した映画情報を更新する
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/movie'
+  /movie/:
+    parameters: []
+    post:
+      summary: ''
+      operationId: regist
+      responses:
+        '200':
+          description: OK
+      description: 映画を登録する
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/movie'
+  /movies/search:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: ''
+      operationId: search
+      parameters:
+        - $ref: '#/parameters/name'
+        - $ref: '#/parameters/opening_date'
+      description: 映画を検索する
+schemes:
+  - https
+produces:
+  - application/json
+basePath: movies
+securityDefinitions: {}
+responses:
+  正常応答（映画情報あり）:
+    description: Example response
+    content:
+      application/json:
+        schema:
+          properties:
+            id:
+              type: string
+    schema:
+      type: object
+      properties:
+        result:
+          type: string
+        '':
+          $ref: '#/definitions/movies'
+      required:
+        - result
+definitions:
+  movie:
+    title: movie
+    type: object
+    description: 映画情報
+    properties:
+      name:
+        type: string
+        description: 映画名
+      description:
+        type: string
+        description: 説明
+      opening_date:
+        type: string
+        description: 公開日
+        format: date
+    required:
+      - name
+      - description
+      - opening_date
+parameters:
+  id:
+    name: id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: 映画ID
+  name:
+    name: name
+    in: query
+    required: true
+    schema:
+      type: string
+      maxLength: 200
+    description: 映画名
+  opening_date:
+    name: opening_date
+    in: query
+    required: true
+    schema:
+      type: string
+      format: date
+    description: 公開日
