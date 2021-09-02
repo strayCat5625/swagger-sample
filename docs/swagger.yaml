@@ -2,6 +2,7 @@ swagger: '2.0'
 info:
   version: 1.0.0
   title: 映画
+  description: お気に入りの映画情報とまとめたAPI
 paths:
   '/movies/{id}':
     get:
@@ -23,10 +24,11 @@ paths:
               result:
                 $ref: ''
       operationId: reference
+      summary: 映画情報取得
     parameters:
       - $ref: '#/parameters/id'
     put:
-      summary: ''
+      summary: 映画情報更新
       operationId: update
       responses:
         '200':
@@ -40,7 +42,7 @@ paths:
   /movie/:
     parameters: []
     post:
-      summary: ''
+      summary: 映画情報登録
       operationId: regist
       responses:
         '200':
@@ -53,7 +55,7 @@ paths:
             $ref: '#/definitions/movie'
   /movies/search:
     get:
-      summary: Your GET endpoint
+      summary: 映画情報更新
       tags: []
       responses:
         '200':
@@ -135,3 +137,4 @@ parameters:
       type: string
       format: date
     description: 公開日
+host: 'localhost:8080'
