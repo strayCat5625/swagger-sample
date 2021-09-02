@@ -2,6 +2,7 @@ swagger: '2.0'
 info:
   version: 1.0.0
   title: 映画
+  description: お気に入りの映画情報とまとめたAPI
 paths:
   '/movies/{id}':
     get:
