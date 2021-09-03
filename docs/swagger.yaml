@@ -63,7 +63,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: ''
+              $ref: '#/definitions/movie'
       operationId: search
       parameters:
         - $ref: '#/parameters/name'
