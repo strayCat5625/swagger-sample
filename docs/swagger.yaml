@@ -98,6 +98,7 @@ definitions:
     title: movie
     type: object
     description: 映画情報
+    x-examples: {}
     properties:
       name:
         type: string
@@ -109,6 +110,9 @@ definitions:
         type: string
         description: 公開日
         format: date
+      director_name:
+        type: string
+        description: 監督名
     required:
       - name
       - description
